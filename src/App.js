@@ -1,18 +1,44 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import * as Sentry from '@sentry/browser';
+import NewError from './NewError';
+
+
+Sentry.init({
+ release: "%REACT_APP_RELEASE%",
+ dsn: "https://08180de465554bf3848fdc2034fff008@sentry.io/1376935"
+});
+// should have been called before using it here
+// ideally before even rendering your react app 
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { value: '' };
+  }
+  handleChange = event => {
+    this.setState({ value: event.target.value });
+  };
+  handleSubmit = event => {
+    event.preventDefault();
+    const { value } = this.state;
+    if (value) {
+      throw new Error(`Test error: ${value}`);
+    }
+  };
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          <p>Sentry</p>
-          <p>Testing</p>
-          <p>For</p>
-          <p>Source</p>
-          <p>Maps</p>
+          <img src={logo} className="App-logo" alt="logo" />
+          <h1 className="App-title">React + Sentry example app</h1>
         </header>
+        <p>Type some text and submit to throw an error</p>
+        <form onSubmit={this.handleSubmit}>
+          <input onChange={this.handleChange} type="text" name="name" />
+          <input type="submit" value="Submit" />
+        </form>
       </div>
     );
   }
