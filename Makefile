@@ -1,7 +1,3 @@
-# Must have `sentry-cli` installed globally
-# Following variable must be passed in
-#  SENTRY_AUTH_TOKEN
-# 8a472919d5034cf5869dfb866246d1ebb83de97deebb4ddfa0a2c031926f16a4
 
 SENTRY_ORG=nutrien
 SENTRY_PROJECT=sourcemap-testing-temp
