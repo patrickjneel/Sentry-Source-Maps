@@ -2,15 +2,12 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import * as Sentry from '@sentry/browser';
-import NewError from './NewError';
-
 
 Sentry.init({
- release: "%REACT_APP_RELEASE%",
+ release: process.env.REACT_APP_RELEASE,
  dsn: "https://08180de465554bf3848fdc2034fff008@sentry.io/1376935"
 });
-// should have been called before using it here
-// ideally before even rendering your react app 
+
 
 class App extends Component {
   constructor(props) {
